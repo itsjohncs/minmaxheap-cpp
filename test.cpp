@@ -6,7 +6,6 @@
  * @brief google-test tests for @ref MinMaxHeap.
  **/
 
-#define ERROR_NOPRINT
 #include "MinMaxHeap.hpp"
 
 #include "gtest/gtest.h"
@@ -15,6 +14,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+
+using namespace minmax;
 
 class MinMaxHeapTest: public ::testing::Test
 {

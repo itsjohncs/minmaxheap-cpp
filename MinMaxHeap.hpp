@@ -13,9 +13,31 @@
 #pragma once
 
 #include <vector>
+#include <stdexcept>
+#include <iostream>
 
-#include "error.hpp"
-#include "utility.h"
+namespace minmax
+{
+
+/**
+ * @brief Returns the log base 2 of a number @b zvalue.
+ **/
+inline unsigned int log2(unsigned int zvalue)
+{
+    // log2(0) is undefined so error
+    if (zvalue == 0) throw std::domain_error("Log base 2 of 0 is undefined.");
+
+    unsigned int result = 0;
+
+    // Loop until zvalue equals 0
+    while (zvalue)
+    {
+        zvalue >>= 1;
+        ++result;
+    }
+
+    return result - 1;
+}
 
 /**
  * @brief An implementation of the Min-Max Heap.
@@ -188,8 +210,8 @@ class MinMaxHeap // Root is on Max level
 
         // Ensure the element exists.
         if (zindex >= heap_.size())
-            ERROR(std::invalid_argument("Element specified by zindex does not "
-                                        "exist"));
+            throw std::invalid_argument("Element specified by zindex does not "
+                                        "exist");
 
         /* This will hold the index of the smallest node among the children,
          * grandchildren of the current node, and the current node itself. */
@@ -257,9 +279,9 @@ class MinMaxHeap // Root is on Max level
         {
             case 0:
                 // The heap is empty so throw an error
-                ERROR(std::underflow_error("No min element exists because "
+                throw std::underflow_error("No min element exists because "
                                            "there are no elements in the "
-                                           "heap."));
+                                           "heap.");
             case 1:
                 // There is only one element in the heap, return that element
                 return 0;
@@ -283,8 +305,8 @@ class MinMaxHeap // Root is on Max level
     {
         // Ensure the element exists
         if (zindex >= (unsigned int)heap_.size())
-            ERROR(std::underflow_error("Cannot delete specified element from "
-                                       "the heap because it does not exist."));
+            throw std::underflow_error("Cannot delete specified element from "
+                                       "the heap because it does not exist.");
 
         // If we're deleting the last element in the heap, just delete it
         if (zindex == heap_.size() - 1)
@@ -347,17 +369,20 @@ public:
     {
         // If the heap is empty throw an error
         if (empty())
-            ERROR(std::underflow_error("No max element exists because there "
-                                       "are no elements in the heap."));
+            throw std::underflow_error("No max element exists because there "
+                                       "are no elements in the heap.");
 
         return heap_[0];
     }
 
     /**
      * @brief Returns the element with the least value in the heap.
+     * 
+     * @exception std::underflow_error
      **/
     const T & findMin() const
     {
+        // findMinIndex() will throgh an underflow_error if no min exists
         return heap_[findMinIndex()];
     }
 
@@ -371,8 +396,8 @@ public:
     {
         // If the heap is empty throw an error
         if (heap_.size() == 0)
-            ERROR(std::underflow_error("No max element exists because there "
-                                       "are no elements in the heap."));
+            throw std::underflow_error("No max element exists because there "
+                                       "are no elements in the heap.");
 
         // Save the max value
         T temp = heap_[0];
@@ -400,8 +425,8 @@ public:
     {
         // If the heap is empty throw an error
         if (heap_.size() == 0)
-            ERROR(std::underflow_error("No max element exists because there "
-                                       "are no elements in the heap."));
+            throw std::underflow_error("No max element exists because there "
+                                       "are no elements in the heap.");
 
         // Save the min's index
         unsigned int smallest = findMinIndex();
@@ -432,3 +457,4 @@ public:
     }
 };
 
+} // namespace minmax
