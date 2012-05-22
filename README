@@ -5,8 +5,8 @@ http://forestofcode.blogspot.com/2010/12/c-min-max-heap-implementation.html
 This is a Min-Max Heap implementation written in C++
 
 ## Using ##
-Just copy or link MinMaxHeap.hpp, error.hpp, and utility.h into your source
-tree and include MinMaxHeap to use. There are no dependencies beyond the
+Just copy or link MinMaxHeap.hpp into your source tree and include
+MinMaxHeap.hpp in your code to use. There are no dependencies beyond the
 standard library.
 
 ## Testing ##
