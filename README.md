@@ -1,5 +1,8 @@
 # Min-Max Heap
-This is a Min-Max Heap implementation written in C++
+This is a Min-Max Heap implementation written in C++. I give no
+guarentees of correctness. Check out the
+[issue tracker](https://github.com/brownhead/minmaxheap-cpp/issues)
+for any known problems.
 
 See my blog post for an explanation of this project:
 http://forestofcode.blogspot.com/2010/12/c-min-max-heap-implementation.html
