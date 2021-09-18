@@ -323,6 +323,7 @@ class MinMaxHeap // Root is on Max level
 
         /* Let the element trickle down so that the min-max heap property is
          * preserved */
+        trickleUp(zindex);
         trickleDown(zindex);
     }
 
